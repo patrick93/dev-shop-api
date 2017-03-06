@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "NODE_ENV=development && ./node_modules/.bin/nodemon server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "NODE_ENV=test && mocha --timeout 10000"
   },
   "author": "",
   "license": "ISC",
@@ -16,6 +16,9 @@
     "mongoose": "^4.8.5"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
+    "mocha": "^3.2.0",
     "nodemon": "^1.11.0"
   }
 }

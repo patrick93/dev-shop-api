@@ -28,3 +28,5 @@ app.use('/api', router);
 
 app.listen(port);
 console.log('Server started ' + port);
+
+module.exports = app;
