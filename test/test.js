@@ -281,6 +281,48 @@ describe('Cart', function() {
         });
     });
 
+    it('cleans the cart when placed an order', function(done) {
+        var dev1 = new Developer({
+            id: 1,
+            login: "user1",
+            avatar_url: "http://avatar_url_user1.png",
+            price: 100,
+            hours:1
+        });
+
+        dev1.save(function(err) {
+            if (err) {
+                console.log(err);;
+            }
+        });
+
+        var dev2 = new Developer({
+            id: 2,
+            login: "user2",
+            avatar_url: "http://avatar_url_user2.png",
+            price: 250,
+            hours: 2
+        });
+
+        dev2.save(function(err) {
+            if (err) {
+                console.log(err);;
+            }
+        });
+
+        chai.request(server)
+        .post('/api/order')
+        .send({})
+        .end(function(error, res) {
+            res.should.have.status(200);
+            res.body.should.have.property('message').eql('Order Successfully');
+            Developer.find(function(err, devs) {
+                expect(devs.length).to.equal(0);
+            });
+            done()
+        });
+    });
+
 });
 
 
