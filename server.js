@@ -3,8 +3,10 @@ var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var Developer = require('./app/models/developer');
+var env = process.env.NODE_ENV || 'development';
+var config = require('./config/' + env);
 
-mongoose.connect('mongodb://localhost:27017/devShop');
+mongoose.connect(config.DATABASE_URL);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
