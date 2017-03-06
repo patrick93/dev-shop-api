@@ -26,6 +26,7 @@ router.route('/cart')
         developer.id = req.body.id;
         developer.avatar_url = req.body.avatar_url;
         developer.price = req.body.price;
+        developer.hours = req.body.hours;
 
         developer.save(function(err) {
             if (err) {
@@ -55,6 +56,27 @@ router.route('/cart/:item_id')
             }
 
             res.json({message: 'Successfully deleted'});
+        })
+    })
+    .put(function(req, res) {
+        Developer.findOne({id: req.params.item_id}, function(err, item) {
+            if (err) {
+                res.send(err);
+            }
+
+            item.login = req.body.login;
+            item.id = req.body.id;
+            item.avatar_url = req.body.avatar_url;
+            item.price = req.body.price;
+            item.hours = req.body.hours;
+
+            item.save(function(err) {
+                if (err) {
+                    res.send(err);
+                }
+
+                res.json({ message: 'Item Udated'});
+            })
         })
     })
 
